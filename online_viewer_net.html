@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Baby Golden Retrievers — Cuteness Central</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#FFDDEE;
+      --blue:#DDEBFF;
+      --violet:#EAD9FF;
+      --accent:#FF8FB1;
+      --muted:#6b6b7a;
+      --card:#ffffffcc;
+      --shadow: 0 8px 20px rgba(120,100,130,0.12);
+      --glass: rgba(255,255,255,0.75);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg, var(--blue) 0%, var(--violet) 45%, var(--pink) 100%);
+      color:#333;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    header{
+      position:relative;
+      padding:2rem 1.25rem;
+      text-align:center;
+      overflow:hidden;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+    }
+
+    .logo{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:.75rem;
+    }
+
+    .logo .heart{
+      width:46px;height:46px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),#FFD2EA);
+      display:grid;place-items:center;
+      box-shadow:var(--shadow);
+      color:white;font-weight:700;
+      transform:rotate(-12deg);
+    }
+
+    h1{
+      margin:.25rem 0 .25rem;
+      font-size:clamp(1.6rem, 3.4vw, 2.4rem);
+      color:#5a2d4b;
+      letter-spacing:-0.02em;
+    }
+
+    p.lead{
+      margin:0 auto 1rem;
+      max-width:760px;
+      color:var(--muted);
+      font-weight:500;
+    }
+
+    /* cute floating clouds */
+    .clouds{
+      pointer-events:none;
+      position:absolute;
+      left:0;right:0;top:0;height:100%;
+      z-index:0;
+      opacity:.45;
+    }
+    .cloud{
+      position:absolute;
+      width:220px;height:70px;border-radius:50px;
+      background:rgba(255,255,255,0.85);
+      filter:blur(1px);
+      animation: drift 18s linear infinite;
+      box-shadow: 0 8px 18px rgba(100,80,120,0.06);
+    }
+    .cloud::before,.cloud::after{
+      content:"";position:absolute;border-radius:50%;
+      background:inherit;
+    }
+    .cloud::before{width:90px;height:90px;left:-30px;top:-30px}
+    .cloud::after{width:140px;height:140px;right:-30px;top:-40px}
+    .cloud.c1{left:-10%;top:6%;animation-duration:24s;transform:scale(.9)}
+    .cloud.c2{left:60%;top:2%;animation-duration:20s;transform:scale(.8);opacity:.9}
+    .cloud.c3{left:30%;top:16%;animation-duration:28s;transform:scale(1.05)}
+    @keyframes drift{
+      0%{transform:translateX(-10vw)}
+      50%{transform:translateX(10vw)}
+      100%{transform:translateX(-10vw)}
+    }
+
+    main{
+      position:relative;
+      z-index:2;
+      padding:1rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:1rem;
+      margin-top:1.25rem;
+    }
+
+    @media (max-width:900px){ .grid{grid-template-columns: repeat(2,1fr)} }
+    @media (max-width:600px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      background:var(--card);
+      border-radius:18px;
+      padding:1rem;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .card img{
+      width:100%;
+      height:200px;
+      object-fit:cover;
+      border-radius:12px;
+      display:block;
+      margin-bottom:.75rem;
+      transition:transform .45s ease;
+    }
+    .card:hover img{ transform:scale(1.03) }
+
+    .fact-title{
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      font-weight:700;
+      color:#6b2f4f;
+    }
+    .fact{
+      color:var(--muted);
+      margin-top:.4rem;
+      font-size:.95rem;
+    }
+
+    .hearts{
+      position:absolute; right:12px; top:12px;
+      display:flex; gap:6px;
+    }
+    .hearts span{
+      width:18px;height:18px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),#FFB6D7);
+      display:inline-block;
+      transform:rotate(-18deg);
+      box-shadow: 0 6px 12px rgba(120,80,120,0.12);
+    }
+
+    /* tips column */
+    .aside{
+      grid-column: 1 / -1;
+      display:flex;
+      gap:1rem;
+      align-items:stretch;
+    }
+    @media (min-width:901px){
+      .aside{ grid-column: span 1; flex-direction:column; }
+    }
+
+    .big-card{
+      background:linear-gradient(180deg,#fff8fb, #ffffffcc);
+      border-radius:18px;
+      padding:1rem;
+      box-shadow:var(--shadow);
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+
+    .row{
+      display:flex;
+      gap:1rem;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .cta{
+      display:inline-block;
+      background:linear-gradient(90deg,#FF8FB1,#FFB3D6);
+      color:white;padding:.65rem 1rem;border-radius:12px;
+      text-decoration:none;font-weight:700;box-shadow:0 8px 18px rgba(255,110,160,0.18);
+    }
+
+    footer{
+      margin:2.25rem 0 3rem;
+      text-align:center;color:var(--muted);
+      font-size:.95rem;
+    }
+
+    /* little flower decoration */
+    .flower{
+      width:26px;height:26px;border-radius:50%;
+      display:inline-grid;place-items:center;font-size:16px;
+      background:linear-gradient(180deg,#fff1f8,#ffdff0);
+      box-shadow:0 6px 12px rgba(120,80,120,0.06);
+      margin-left:.25rem;
+    }
+
+    /* subtle floating hearts animation */
+    .floaty{
+      position:absolute;left:12px;bottom:12px;width:80px;height:80px;
+      pointer-events:none;
+    }
+    .floaty i{
+      position:absolute;width:26px;height:26px;background:linear-gradient(135deg,var(--accent),#FFD0EA);
+      transform:rotate(45deg);
+      border-radius:4px 4px 0 0;
+      left:10px;bottom:0;opacity:.95;
+      animation: bob 4s ease-in-out infinite;
+      box-shadow:0 8px 18px rgba(120,80,120,0.08);
+    }
+    .floaty i::after{
+      content:"";position:absolute;width:26px;height:26px;background:inherit;
+      border-radius:50%;left:-9px;top:-8px;
+    }
+    .floaty i:nth-child(2){left:40px;animation-delay:.6s;transform:scale(.9)}
+    .floaty i:nth-child(3){left:62px;animation-delay:1.2s;transform:scale(.7)}
+    @keyframes bob{
+      0%{ transform:translateY(0) rotate(45deg) }
+      50%{ transform:translateY(-14px) rotate(45deg) }
+      100%{ transform:translateY(0) rotate(45deg) }
+    }
+
+    /* small utilities */
+    .small{
+      font-size:.9rem;color:var(--muted)
+    }
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="logo" aria-hidden="true">
+        <div class="heart">🐶</div>
+        <div>
+          <h1>Baby Golden Retrievers</h1>
+          <div class="small">Puppy facts, care tips & adorable photos</div>
+        </div>
+      </div>
+
+      <p class="lead">Welcome to the cuddliest corner of the internet — everything you want to know about baby Golden Retrievers, wrapped in soft pastels, hearts and happy tails!</p>
+    </div>
+
+    <!-- decorative clouds -->
+    <div class="clouds" aria-hidden="true">
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="cloud c3"></div>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <!-- gallery of cute puppies with facts -->
+    <section class="grid" aria-label="Cute puppy gallery and facts">
+
+      <article class="card" aria-labelledby="f1">
+        <div class="hearts" aria-hidden="true"><span></span><span></span><span></span></div>
+        <img src="https://i.redd.it/b5xmgi712hs51.jpg" alt="An adorable golden retriever puppy looking at the camera">
+        <div class="fact-title" id="f1">Tiny Snuggles <span class="flower">🌸</span></div>
+        <p class="fact">Baby goldens are born with darker fur that lightens as they grow — many start out with a deeper golden or reddish tint that softens into the signature pale gold.</p>
+      </article>
+
+      <article class="card" aria-labelledby="f2">
+        <div class="hearts" aria-hidden="true"><span></span><span></span></div>
+        <img src="https://static.vecteezy.com/system/resources/previews/054/472/866/non_2x/cute-golden-puppy-waving-its-paw-happily-png.png" alt="Puppy paws and a wagging tail">
+        <div class="fact-title" id="f2">Playful Paws <span class="flower">🌼</span></div>
+        <p class="fact">Puppies have boundless energy and learn best with short, fun training sessions — 5–10 minutes is perfect for little attention spans.</p>
+      </article>
+
+      <article class="card" aria-labelledby="f3">
+        <div class="hearts" aria-hidden="true"><span></span></div>
+        <img src="https://dogtime.com/wp-content/uploads/sites/12/2024/02/Smiling-Golden-Retrievers.jpg?w=1024" alt="Golden retriever puppy smiling while playing">
+        <div class="fact-title" id="f3">Gentle Hearts <span class="flower">🌺</span></div>
+        <p class="fact">Golden Retrievers are known for their sociable and affectionate nature. Early socialization helps them grow into confident, friendly dogs.</p>
+      </article>
+
+      <!-- a long card spanning full width for tips -->
+      <article class="card big-card" aria-labelledby="tips">
+        <div class="row">
+          <div style="flex:1 1 320px">
+            <h3 id="tips" style="margin:0;color:#5a2d4b">Puppy Care Tips</h3>
+            <p class="small" style="margin:.25rem 0 .75rem">A quick checklist to keep your baby golden healthy and happy.</p>
+            <ul style="margin:0 0 0 1.1rem;color:var(--muted)">
+              <li><strong>Nutrition:</strong> Use high-quality puppy food formulated for medium-large breeds.</li>
+              <li><strong>Vet visits:</strong> Keep vaccinations and deworming on schedule.</li>
+              <li><strong>Teething:</strong> Provide safe chew toys to ease discomfort.</li>
+              <li><strong>Exercise:</strong> Short walks and supervised play — avoid repetitive high-impact activity.</li>
+              <li><strong>Grooming:</strong> Brush regularly to keep coat soft and reduce shedding.</li>
+            </ul>
+          </div>
+
+          <div style="flex:0 0 240px;align-self:center;text-align:center">
+            <img src="https://www.montgomerybotanicalgardens.com/wp-content/uploads/2021/05/shallow-focus-shot-cute-golden-retriever-puppy-sitting-grass-ground-scaled.jpg" alt="Happy golden retriever puppy sitting" style="width:200px;height:140px;object-fit:cover;border-radius:12px;margin-bottom:.5rem;box-shadow:var(--shadow)">
+            <div class="cta" role="button" tabindex="0" aria-pressed="false">See more puppy tips</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" aria-labelledby="training">
+        <img src="https://i.pinimg.com/736x/94/ef/81/94ef819f66dd64b7103be8dc254587d0.jpg" alt="Puppy playing with a toy">
+        <div class="fact-title" id="training">Training Basics <span class="flower">🌿</span></div>
+        <p class="fact">Start with positive reinforcement: treats, praise, and patience. Teach sit, stay, and recall early to build trust and safety.</p>
+      </article>
+
+      <article class="card" aria-labelledby="sleep">
+        <img src="https://thumbs.dreamstime.com/b/golden-retriever-puppy-sleeps-curled-up-yin-yang-position-soft-gray-background-smooth-lighting-peacefully-sleeping-347975850.jpg" alt="Puppy curled up sleeping">
+        <div class="fact-title" id="sleep">Nap Time <span class="flower">💤</span></div>
+        <p class="fact">Puppies sleep a lot — up to 18–20 hours per day. A comfy bed in a quiet area helps healthy development and mood regulation.</p>
+      </article>
+
+      <article class="card" aria-labelledby="social">
+        <img src="https://pethelpful.com/.image/w_3840,q_auto:good,c_limit/NDowMDAwMDAwMDAwMDY4MjE5/golden-retriever-with-puppy.jpg" alt="Golden retriever puppy meeting another dog">
+        <div class="fact-title" id="social">Social Sniffing <span class="flower">✨</span></div>
+        <p class="fact">Gentle play dates and puppy classes help social skills. Keep meetings short and positive to avoid overwhelm.</p>
+      </article>
+
+    </section>
+
+    <div style="height:18px"></div>
+
+    <section class="container" aria-label="Join the puppy fans">
+      <div class="card" style="display:flex;align-items:center;gap:1rem;justify-content:space-between;flex-wrap:wrap">
+        <div style="flex:1 1 420px">
+          <h3 style="margin:.25rem 0 0;color:#5a2d4b">Want more golden goodness?</h3>
+          <p class="small" style="margin:.25rem 0 .5rem;color:var(--muted)">Join our pretend mailing list (for demo) or follow a real rescue page to find pups and resources.</p>
+          <form onsubmit="alert('Thanks! This demo form does not send real emails.'); return false;">
+            <label for="email" class="small" style="display:block;margin-bottom:.25rem">Email (demo):</label>
+            <input id="email" type="email" placeholder="you@cute.com" required style="padding:.6rem;border-radius:10px;border:1px solid rgba(120,80,120,0.08);width:280px;max-width:100%">
+            <button class="cta" style="margin-left:.6rem;border:none;cursor:pointer">Join</button>
+          </form>
+        </div>
+
+        <div style="flex:0 0 220px;text-align:center">
+          <div class="small" style="margin-bottom:.5rem">Quick Puppy Fact:</div>
+          <div style="font-weight:700;color:#6b2f4f;font-size:1.1rem">Golden retriever puppies have a “soft mouth” instinct — bred to carry game gently.</div>
+        </div>
+      </div>
+    </section>
+  
+
+    <!-- decorative floaty hearts -->
+    <div class="floaty" aria-hidden="true">
+      <i></i><i></i><i></i>
+    </div>
+
+    <footer>
+      <div class="small">Made with 💖 for puppy lovers • Photos via Unsplash</div>
+      <div style="margin-top:.5rem;font-size:.85rem;color:var(--muted)">Tip: to swap images use a different Unsplash query in the <code>img src</code> URLs.</div>
+    </footer>
+
+  </main>
+</body>
+</html>
+
